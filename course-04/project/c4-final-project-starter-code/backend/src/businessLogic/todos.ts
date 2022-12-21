@@ -6,6 +6,7 @@ import { CreateTodoRequest } from '../requests/CreateTodoRequest'
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
 import { createLogger } from '../utils/logger'
 import * as uuid from 'uuid'
+import { update } from 'lodash';
 
 // TODO: Implement businessLogic
 const logger = createLogger('businessLogic-todos')
@@ -44,7 +45,11 @@ export async function updateTodo(userId: string, todoId: string, updatedTodo: Up
     let todoUpdate: TodoUpdate = {
         ... updatedTodo
     }
-    logger.info('Updating todo item: ' + userId + "," + todoId + "," + todoUpdate)
+    logger.info('Updating todo item: ', {
+        'userId': userId,
+        'todoId': todoId,
+        'updatedTodo': updatedTodo
+    })
     return todosAccess.updateTodo(userId, todoId, todoUpdate)
 }
 
